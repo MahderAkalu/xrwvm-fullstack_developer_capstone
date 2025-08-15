@@ -1,19 +1,19 @@
 # Uncomment the required imports before adding the code
 
-# from django.shortcuts import render
-# from django.http import HttpResponseRedirect, HttpResponse
-# from django.contrib.auth.models import User
-# from django.shortcuts import get_object_or_404, render, redirect
-# from django.contrib.auth import logout
-# from django.contrib import messages
-# from datetime import datetime
+from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth import logout
+from django.contrib import messages
+from datetime import datetime
 
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate
 import logging
 import json
 from django.views.decorators.csrf import csrf_exempt
-# from .populate import initiate
+from .populate import initiate
 
 
 # Get an instance of a logger
@@ -39,13 +39,47 @@ def login_user(request):
     return JsonResponse(data)
 
 # Create a `logout_request` view to handle sign out request
-# def logout_request(request):
-# ...
+def logout_request(request):
+    logout(request) # Terminate user session
+    data = {"userName":""} # Return empty username
+    return JsonResponse(data)
+
 
 # Create a `registration` view to handle sign up request
-# @csrf_exempt
-# def registration(request):
-# ...
+@csrf_exempt
+def registration(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            username = data.get('userName')
+            password = data.get('password')
+            first_name = data.get('firstName', '')
+            last_name = data.get('lastName', '')
+
+            # Check if username already exists
+            if User.objects.filter(username=username).exists():
+                return JsonResponse({'error': 'Username already exists'}, status=400)
+
+            # Create new user
+            user = User.objects.create_user(
+                username=username,
+                password=password,
+                first_name=first_name,
+                last_name=last_name
+            )
+            user.save()
+
+            # Authenticate and login the user
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return JsonResponse({'userName': username, 'status': 'Registered and logged in'})
+
+            return JsonResponse({'error': 'Authentication failed after registration'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+    else:
+        return JsonResponse({'error': 'POST request required'}, status=405)
 
 # # Update the `get_dealerships` view to render the index page with
 # a list of dealerships
