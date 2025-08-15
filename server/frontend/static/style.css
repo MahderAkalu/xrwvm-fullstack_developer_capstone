@@ -11,6 +11,15 @@ img{
   margin-right:5%;
   margin-top: 1%;
   margin-bottom: 1%;
+  font-family: 'Arial', sans-serif; /* Change 'Arial' to your desired font */
+}
+
+.title {
+  font-family: 'Courier New', monospace; /* Specific font for title */
+}
+
+.card-text {
+  font-family: 'Times New Roman', serif; /* Specific font for card text */
 }
 
 .row{
