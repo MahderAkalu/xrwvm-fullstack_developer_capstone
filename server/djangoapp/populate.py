@@ -14,24 +14,23 @@ def initiate():
     for data in car_make_data:
         car_make_instances.append(
             CarMake.objects.create(
-                name=data['name'], 
+                name=data['name'],
                 description=data['description']
             )
         )
-
 
     # Create CarModel instances with the corresponding CarMake instances
     car_model_data = [
       {
           "name": "Pathfinder",
-          "type": "SUV", 
+          "type": "SUV",
           "year": 2023, 
           "car_make": car_make_instances[0]
       },
       {
           "name": "Qashqai",
           "type": "SUV",
-          "year": 2023, 
+          "year": 2023,
           "car_make": car_make_instances[0]
       },
       {
@@ -43,7 +42,7 @@ def initiate():
       {
           "name": "A-Class",
           "type": "SUV",
-          "year": 2023, 
+          "year": 2023,
           "car_make": car_make_instances[1]
       },
       {
@@ -55,7 +54,7 @@ def initiate():
       {
           "name": "E-Class",
           "type": "SUV",
-          "year": 2023, 
+          "year": 2023,
           "car_make": car_make_instances[1]
       },
       {
@@ -79,12 +78,12 @@ def initiate():
       {
           "name": "Sorrento",
           "type": "SUV",
-          "year": 2023, 
+          "year": 2023,
           "car_make": car_make_instances[3]
       },
       {
           "name": "Carnival",
-          "type": "SUV", 
+          "type": "SUV",
           "year": 2023,
           "car_make": car_make_instances[3]
       },
@@ -97,17 +96,17 @@ def initiate():
       {
           "name": "Corolla",
           "type": "Sedan",
-          "year": 2023, 
+          "year": 2023,
           "car_make": car_make_instances[4]
       },
       {
-          "name": "Camry", 
+          "name": "Camry",
           "type": "Sedan",
           "year": 2023,
           "car_make": car_make_instances[4]
       },
       {
-          "name": "Kluger", 
+          "name": "Kluger",
           "type": "SUV",
           "year": 2023,
           "car_make": car_make_instances[4]
@@ -122,4 +121,3 @@ def initiate():
             type=data['type'],
             year=data['year']
         )
-        
