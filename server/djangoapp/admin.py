@@ -11,11 +11,11 @@ class CarModelInline(admin.TabularInline):  # shows CarModels inside CarMake
 # CarModelAdmin class
 class CarModelAdmin(admin.ModelAdmin):
     list_display = [
-    "name",
-    "car_make",
-    "type",
-    "year"
-]   # use 'type' not 'car_type'
+      "name",
+      "car_make",
+      "type",
+      "year"
+    ]   # use 'type' not 'car_type'
     list_filter = ("type", "year", "car_make")            # same here
     search_fields = ("name",)
 
