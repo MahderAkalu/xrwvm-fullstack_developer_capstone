@@ -5,7 +5,7 @@
 from django.contrib.auth.models import User
 # from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth import logout
-#vfrom django.contrib import messages
+# vfrom django.contrib import messages
 # from datetime import datetime
 
 from django.http import JsonResponse
@@ -32,7 +32,7 @@ def get_cars(request):
     for car_model in car_models:
         cars.append(
             {
-                "CarModel": car_model.name, 
+                "CarModel": car_model.name,
                 "CarMake": car_model.car_make.name
             }
         )
@@ -132,7 +132,10 @@ def get_dealer_reviews(request, dealer_id):
             return JsonResponse(
                 {
                     "status": 500,
-                    "message": "Failed to fetch reviews from the sentiment analyzer."
+                    "message": 
+                    (
+                        "Failed to fetch reviews from the sentiment analyzer."
+                    )
                 }
             )
 
@@ -164,7 +167,7 @@ def add_review(request):
     if request.user.is_authenticated:
         data = json.loads(request.body)
         try:
-            post_review(data)  
+            post_review(data)
             # Ensure this function is defined properly
             return JsonResponse(
                 {
@@ -175,7 +178,7 @@ def add_review(request):
         except Exception as e:
             return JsonResponse(
                 {
-                    "status": 500, 
+                    "status": 500,
                     "message": f"Error in posting review: {str(e)}"
                 }
             )
