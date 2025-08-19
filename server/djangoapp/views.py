@@ -132,7 +132,7 @@ def get_dealer_reviews(request, dealer_id):
             return JsonResponse(
                 {
                     "status": 500,
-                    "message": 
+                    "message":
                     (
                         "Failed to fetch reviews from the sentiment analyzer."
                     )
